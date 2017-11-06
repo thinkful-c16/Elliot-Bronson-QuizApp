@@ -34,17 +34,37 @@ const QUESTIONS = [
 ];
 
 const STORE = {
-
+  questionIndex: 1  //to track where the user is at in the quiz
 };
+
 
 //Template generators
 function generateAnswerList(answers) {
 
 }
 
+function generateNextQuestion() {
+  let possibleAnswers = QUESTIONS[STORE.questionIndex].answers.map(function(val, index){
+    return `<div><input type="radio" name="answers" value="${val}" data-index-attr="${index}" /><span class="possible-answers">${val}</span></div>`;
+  })
+  possibleAnswers = possibleAnswers.join('');
+  let content = `
+    <div class="question-container">
+      <h2 class="question-title">
+        ${QUESTIONS[STORE.questionIndex].question}
+      </h2>
+      <form id="answers-options">
+        ${possibleAnswers}
+        <input type="submit">Submit</input>
+      </form>
+    </div>
+  `
+  return content;
+}
+
 //Rendering functions
 function renderQuestionText() {
-
+  $('.container')
 }
 
 //Event handlers
@@ -58,4 +78,6 @@ function handleAnswerSubmitted() {
 
 $(function(){
   handleAnswerSubmitted();
+  document.getElementById("testing").innerHTML=generateNextQuestion();
+  //$("#testing").html(generateNextQuestion());
 });
