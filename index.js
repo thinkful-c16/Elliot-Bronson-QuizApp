@@ -34,7 +34,7 @@ const QUESTIONS = [
 ];
 
 const STORE = {
-  questionIndex: 1  //to track where the user is at in the quiz
+  questionIndex: 0  //to track where the user is at in the quiz
 };
 
 
@@ -58,13 +58,13 @@ function generateNextQuestion() {
         <input type="submit">Submit</input>
       </form>
     </div>
-  `
+  `;
   return content;
 }
 
 //Rendering functions
 function renderQuestionText() {
-  $('.container')
+  $('.container');
 }
 
 //Event handlers
