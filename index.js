@@ -78,6 +78,6 @@ function handleAnswerSubmitted() {
 
 $(function(){
   handleAnswerSubmitted();
-  document.getElementById("testing").innerHTML=generateNextQuestion();
+ 
   //$("#testing").html(generateNextQuestion());
 });
