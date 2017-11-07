@@ -49,7 +49,7 @@ function generateQuestionText(currentIndex) {
               <input type="radio" name="answers" value="${val}" data-index-attr="${index}" />
               <span class="possible-answers">${val}</span>
             </div>`;
-  })
+  });
   possibleAnswers = possibleAnswers.join('');
   let content = `
     <div class="question-container">
@@ -77,7 +77,7 @@ function handleStartSubmit() {
   $('.start').on('click' , function(event) {
     event.preventDefault();
     //console.log('it works');
-   renderNextQuestion(STORE.questionIndex);
+    renderNextQuestion(STORE.questionIndex);
   });
 }
 
