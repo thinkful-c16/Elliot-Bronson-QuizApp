@@ -43,9 +43,12 @@ function generateAnswerList(answers) {
 
 }
 
-function generateNextQuestion(currentIndex) {
+function generateQuestionText(currentIndex) {
   let possibleAnswers = QUESTIONS[STORE.questionIndex].answers.map(function(val, index){
-    return `<div><input type="radio" name="answers" value="${val}" data-index-attr="${index}" /><span class="possible-answers">${val}</span></div>`;
+    return `<div>
+              <input type="radio" name="answers" value="${val}" data-index-attr="${index}" />
+              <span class="possible-answers">${val}</span>
+            </div>`;
   })
   possibleAnswers = possibleAnswers.join('');
   let content = `
@@ -55,7 +58,7 @@ function generateNextQuestion(currentIndex) {
       </h2>
       <form id="answers-options">
         ${possibleAnswers}
-        <input type="submit">Submit</input>
+        <input type="submit"></input>
       </form>
     </div>
   `;
@@ -63,19 +66,18 @@ function generateNextQuestion(currentIndex) {
 }
 
 //Rendering functions
-function renderQuestionText() {
-  $('.container').html(generateNextQuestion);
-  
+function renderNextQuestion(questionIndex) {
+  const renderedQuestion = generateQuestionText(questionIndex);
+  $('.container').html(renderedQuestion); 
 }
 
 //Event handlers
 
 function handleStartSubmit() {
   $('.start').on('click' , function(event) {
+    event.preventDefault();
     //console.log('it works');
-   let questionIndex = 0;
-   generateNextQuestion(questionIndex);
-
+   renderNextQuestion(STORE.questionIndex);
   });
 }
 
@@ -88,8 +90,9 @@ function handleAnswerSubmitted() {
 }
 
 $(function(){
+  //renderQuestionText();
   handleAnswerSubmitted();
   handleStartSubmit();
-  renderQuestionText();
+  
   //$("#testing").html(generateNextQuestion());
 });
