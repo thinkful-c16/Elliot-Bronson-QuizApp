@@ -43,7 +43,7 @@ function generateAnswerList(answers) {
 
 }
 
-function generateNextQuestion() {
+function generateNextQuestion(currentIndex) {
   let possibleAnswers = QUESTIONS[STORE.questionIndex].answers.map(function(val, index){
     return `<div><input type="radio" name="answers" value="${val}" data-index-attr="${index}" /><span class="possible-answers">${val}</span></div>`;
   })
@@ -64,10 +64,21 @@ function generateNextQuestion() {
 
 //Rendering functions
 function renderQuestionText() {
-  $('.container');
+  $('.container').html(generateNextQuestion);
+  
 }
 
 //Event handlers
+
+function handleStartSubmit() {
+  $('.start').on('click' , function(event) {
+    //console.log('it works');
+   let questionIndex = 0;
+   generateNextQuestion(questionIndex);
+
+  });
+}
+
 function handleAnswerSubmitted() {
   $('.user-controls').on('click', '.submit-answer', () => {
     // Retrive answer identifier of user-checked radio button
@@ -78,6 +89,7 @@ function handleAnswerSubmitted() {
 
 $(function(){
   handleAnswerSubmitted();
- 
+  handleStartSubmit();
+  renderQuestionText();
   //$("#testing").html(generateNextQuestion());
 });
